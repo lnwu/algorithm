@@ -1,17 +1,21 @@
-const moneyList = [1, 5, 10];
-
 const getCountOfMoney = total => {
-  let left = total;
-  let count = 0;
+  const fn = [0];
 
-  for (const money of moneyList.reverse()) {
-    count += Math.floor(left / money);
-    left = left % money;
-
-    if (left === 0) {
-      return count;
+  for (let i = 1; i < total; i++) {
+    if (i < 5) {
+      fn[i] = i;
     }
+
+    if (i >= 5 && i < 11) {
+      fn[i] = Math.min(fn[i - 5], fn[i - 1]) + 1;
+    }
+
+    if (i >= 11) {
+      fn[i] = Math.min(fn[i - 11], fn[i - 5], fn[i - 1]) + 1;
+    }
+
+    console.log(`fn[${i}]:`, fn[i]);
   }
 };
 
-console.log("getCountOfMoney", getCountOfMoney(15));
+console.log("getCountOfMoney", getCountOfMoney(24));
